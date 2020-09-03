@@ -16,11 +16,24 @@ app.set('views', 'views')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('index', {
+        title: 'Home page',
+        isHome: true
+    })
 })
 
-app.get('/about', (req, res) => {
-    res.render('about')
+app.get('/add', (req, res) => {
+    res.render('add', {
+        title: 'Add new service',
+        isAdd: true
+    })
+})
+
+app.get('/services', (req, res) => {
+    res.render('services', {
+        title: 'Services',
+        isServices: true
+    })
 })
 
 const PORT = process.env.PORT || 3000

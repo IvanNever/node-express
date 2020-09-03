@@ -2,15 +2,23 @@
     <div class="nav-wrapper">
         <a href="#" class="brand-logo">Web-sites store</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li>
-                <a href="/">Home page</a>
-            </li>
-            <li>
-                <a href="/services">Services</a>
-            </li>
-            <li>
-                <a href="/add">Add service</a>
-            </li>
+            {{#if isHome}}
+                <li class="active"><a href="/">Home page</a></li>
+            {{else}}
+                <li><a href="/">Home page</a></li>
+            {{/if}}
+
+            {{#if isServices}}
+                <li class="active"><a href="/services">Services</a></li>
+            {{else}}
+                <li><a href="/services">Services</a></li>
+            {{/if}}
+
+            {{#if isAdd}}
+                <li class="active"><a href="/add">Add service</a></li>
+            {{else}}
+                <li><a href="/add">Add service</a></li>
+            {{/if}}
         </ul>
     </div>
 </nav>
