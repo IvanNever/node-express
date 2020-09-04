@@ -1,7 +1,8 @@
 const express = require('express')
+const path = require('path')
 const exphbs = require('express-handlebars')
-const { extname } = require('path')
 const homeRoutes = require('./routes/home')
+const cartRoutes = require('./routes/cart')
 const addRoutes = require('./routes/add')
 const servicesRoutes = require('./routes/services')
 
@@ -16,12 +17,13 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
 
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: true}))
 
 app.use('/', homeRoutes)
 app.use('/add', addRoutes)
 app.use('/services', servicesRoutes)
+app.use('/cart', cartRoutes)
 
 const PORT = process.env.PORT || 3000
 
