@@ -1,4 +1,5 @@
 const {Router} = require('express')
+const Service = require('../models/service')
 const router = Router()
 
 router.get('/', (req, res) => {
@@ -8,8 +9,11 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
-    console.log(req.body)
+router.post('/', async (req, res) => {
+    const {title, price, img} = req.body
+    const service = new Service(title, price, img)
+
+    await service.save()
 
     res.redirect('/services')
 })
