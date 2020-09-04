@@ -53,6 +53,11 @@ class Service {
             )
         })
     }
+
+    static async getById(id) {
+        const services = await Service.getAll()
+        return services.find(item => item.id === id)
+    }
 }
 
 module.exports = Service
