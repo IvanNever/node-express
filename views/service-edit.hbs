@@ -1,0 +1,21 @@
+<h1>Edit service {{service.title}}</h1>
+
+<form action="/services/edit" method="POST">
+    <div class="input-field">
+        <input id="title" type="text" name="title" class="validate" value="{{service.title}}" required>
+        <label for="title">Service name</label>
+        <span class="helper-text" data-error="Enter service name"></span>
+    </div>
+    <div class="input-field">
+        <input id="price" type="number" name="price" class="validate" required min="1" value="{{service.price}}">
+        <label for="price">Service price</label>
+        <span class="helper-text" data-error="Enter service price"></span>
+    </div>
+    <div class="input-field">
+        <input id="img" type="text" name="img" class="validate" required value="{{service.img}}">
+        <label for="img">Image URL</label>
+        <span class="helper-text" data-error="Enter service image URL"></span>
+    </div>
+    <input type="hidden" name="id" value="{{service.id}}">
+    <button class="btn btn-primary">Edit</button>
+</form>
