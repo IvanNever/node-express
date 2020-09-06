@@ -3,7 +3,7 @@ const Service = require('../models/service')
 const router = Router()
 
 router.get('/', async (req, res) => {
-    const services = await Service.getAll()
+    const services = await Service.find()
 
     res.render('services', {
         title: 'Services',
@@ -17,7 +17,7 @@ router.get('/:id/edit', async (req, res) => {
         return res.redirect('/')
     }
 
-    const service = await Service.getById(req.params.id)
+    const service = await Service.findById(req.params.id)
 
     res.render('service-edit', {
         title: `Edit ${service.title}`,
@@ -26,12 +26,14 @@ router.get('/:id/edit', async (req, res) => {
 })
 
 router.post('/edit', async (req, res) => {
-    await Service.update(req.body)
+    const {id} = req.body
+    delete req.body.id
+    await Service.findByIdAndUpdate(id, req.body)
     res.redirect('/services')
 })
 
 router.get('/:id', async (req, res) => {
-    const service = await Service.getById(req.params.id)
+    const service = await Service.findById(req.params.id)
     res.render('service', {
         layout: 'empty',
         title: `Service ${service.title}`,
