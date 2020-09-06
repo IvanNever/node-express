@@ -32,6 +32,15 @@ router.post('/edit', async (req, res) => {
     res.redirect('/services')
 })
 
+router.post('/remove', async (req, res) => {
+    try {
+        await Service.deleteOne({ _id: req.body.id })
+        res.redirect('/services')
+    } catch(e) {
+        console.log(e)
+    }
+})
+
 router.get('/:id', async (req, res) => {
     const service = await Service.findById(req.params.id)
     res.render('service', {

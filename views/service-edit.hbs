@@ -1,6 +1,6 @@
 <h1>Edit service {{service.title}}</h1>
 
-<form action="/services/edit" method="POST">
+<form action="/services/edit" method="POST" class="service-form">
     <div class="input-field">
         <input id="title" type="text" name="title" class="validate" value="{{service.title}}" required>
         <label for="title">Service name</label>
@@ -17,5 +17,10 @@
         <span class="helper-text" data-error="Enter service image URL"></span>
     </div>
     <input type="hidden" name="id" value="{{service.id}}">
-    <button class="btn btn-primary">Edit</button>
+    <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+
+<form action="/services/remove" method="POST">
+    <input type="hidden" name="id" value="{{service.id}}">
+    <button class="btn red">Delete</button>
 </form>

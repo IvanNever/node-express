@@ -31,3 +31,7 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.service-form {
+    margin-bottom: 1rem;
+}
