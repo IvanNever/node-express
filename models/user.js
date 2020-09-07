@@ -27,4 +27,37 @@ const userSchema = new Schema({
     }
 })
 
+userSchema.methods.addToCart = function(service) {
+    const items = [...this.cart.items]
+    const index = items.findIndex(item => {
+        return item.serviceId.toString() === service._id.toString()
+    })
+    if(index >= 0) {
+        items[index].count += 1
+    } else {
+        items.push({
+            serviceId: service._id,
+            count: 1
+        })
+    }
+
+    this.cart = {items}
+
+    return this.save()
+}
+
+userSchema.methods.removeFromCart = function(id) {
+    let items = [...this.cart.items]
+    const index = items.findIndex(item => item.serviceId.toString() === id.toString())
+
+    if(items[index].count === 1) {
+        items = items.filter((item => item.serviceId.toString() !== id.toString()))
+    } else {
+        items[index].count--
+    }
+
+    this.cart = {items}
+    return this.save()
+}
+
 module.exports = model('User', userSchema)

@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose')
 
-const service = new Schema({
+const serviceSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -16,4 +16,13 @@ const service = new Schema({
     }
 })
 
-module.exports = model('Service', service)
+serviceSchema.method('toClient', function() {
+    const service = this.toObject()
+
+    service.id = service._id
+    delete service._id
+
+    return service
+})
+
+module.exports = model('Service', serviceSchema)
