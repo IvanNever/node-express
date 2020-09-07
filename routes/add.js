@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     const {title, price, img} = req.body
-    const service = new Service({title, price, img})
+    const service = new Service({title, price, img, userId: req.user})
 
     try {
         await service.save()

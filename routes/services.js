@@ -3,7 +3,7 @@ const Service = require('../models/service')
 const router = Router()
 
 router.get('/', async (req, res) => {
-    const services = await Service.find()
+    const services = await Service.find().populate('userId', 'email name')
 
     res.render('services', {
         title: 'Services',
