@@ -9,6 +9,7 @@ const cartRoutes = require('./routes/cart')
 const addRoutes = require('./routes/add')
 const servicesRoutes = require('./routes/services')
 const ordersRoutes = require('./routes/orders')
+const authRoutes = require('./routes/auth')
 const User = require('./models/user.js')
 
 const app = express()
@@ -41,6 +42,7 @@ app.use('/add', addRoutes)
 app.use('/services', servicesRoutes)
 app.use('/cart', cartRoutes)
 app.use('/orders', ordersRoutes)
+app.use('/auth', authRoutes)
 
 const PORT = process.env.PORT || 3000
 
