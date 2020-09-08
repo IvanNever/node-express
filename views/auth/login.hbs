@@ -7,6 +7,11 @@
         </ul>
         </div>
         <div id="login" class="col s8 offset-s2">
+
+            {{#if loginError}}
+                <p class="alert">{{loginError}}</p>
+            {{/if}}
+
             <h1>Enter to account</h1>
             <form action="/auth/login" method="POST">
                 <div class="input-field">
@@ -19,12 +24,23 @@
                     <label for="password">Password</label>
                     <span class="helper-text" data-error="Enter password"></span>
                 </div>
+                <input type="hidden" name="_csrf" value="{{csrf}}">
                 <button class="btn btn-primary" type="submit">Sign in</button>
             </form>
         </div>
         <div id="register" class="col s8 offset-s2">
+
+            {{#if registerError}}
+                <p class="alert">{{registerError}}</p>
+            {{/if}}
+
             <h1>Create account</h1>
             <form action="/auth/register" method="POST">
+                <div class="input-field">
+                    <input id="name" type="text" name="name" class="validate" required>
+                    <label for="name">Your name</label>
+                    <span class="helper-text" data-error="Enter your name"></span>
+                </div>
                 <div class="input-field">
                     <input id="remail" type="email" name="email" class="validate" required>
                     <label for="remail">Email</label>
@@ -36,10 +52,11 @@
                     <span class="helper-text" data-error="Enter password"></span>
                 </div>
                 <div class="input-field">
-                    <input id="cofirm" type="password" name="password" class="validate" required>
+                    <input id="cofirm" type="password" name="confirm" class="validate" required>
                     <label for="confirm">Confirm password</label>
                     <span class="helper-text" data-error="Confirm password"></span>
                 </div>
+                <input type="hidden" name="_csrf" value="{{csrf}}">
                 <button class="btn btn-primary" type="submit">Sign up</button>
             </form>
         </div>

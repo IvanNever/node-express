@@ -4,7 +4,9 @@ const auth = require('../middleware/auth')
 const router = Router()
 
 router.get('/', async (req, res) => {
-    const services = await Service.find().populate('userId', 'email name')
+    const services = await Service.find()
+        .populate('userId', 'email name')
+        .select('price title img')
 
     res.render('services', {
         title: 'Services',
