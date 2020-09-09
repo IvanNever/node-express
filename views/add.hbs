@@ -1,18 +1,22 @@
 <h1>Add new service</h1>
 
+{{#if error}}
+    <p class="alert">{{error}}</p>
+{{/if}}
+
 <form action="/add" method="POST">
     <div class="input-field">
-        <input id="title" type="text" name="title" class="validate" required>
+        <input id="title" type="text" name="title" class="validate" required value="{{data.title}}">
         <label for="title">Service name</label>
         <span class="helper-text" data-error="Enter service name"></span>
     </div>
     <div class="input-field">
-        <input id="price" type="number" name="price" class="validate" required min="1">
+        <input id="price" type="number" name="price" class="validate" required min="1" value="{{data.price}}">
         <label for="price">Service price</label>
         <span class="helper-text" data-error="Enter service price"></span>
     </div>
     <div class="input-field">
-        <input id="img" type="text" name="img" class="validate" required>
+        <input id="img" type="text" name="img" class="validate" required value="{{data.img}}">
         <label for="img">Image URL</label>
         <span class="helper-text" data-error="Enter service image URL"></span>
     </div>

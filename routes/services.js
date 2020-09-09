@@ -1,6 +1,8 @@
 const {Router} = require('express')
+const {validationResult} = require('express-validator')
 const Service = require('../models/service')
 const auth = require('../middleware/auth')
+const {serviceValidators} = require('../utils/validators')
 const router = Router()
 
 function isOwner(service, req) {
@@ -43,9 +45,15 @@ router.get('/:id/edit', auth, async (req, res) => {
     }
 })
 
-router.post('/edit', auth, async (req, res) => {
+router.post('/edit', auth, serviceValidators, async (req, res) => {
+    const errors = validationResult(req)
+    const {id} = req.body
+
+    if(!errors.isEmpty()) {
+        return res.status(422).redirect(`${id}/edit?allow=true`)
+    }
+
     try {
-        const {id} = req.body
         delete req.body.id
 
         const service = await Service.findById(id)
